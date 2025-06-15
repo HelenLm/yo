@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar Cuentas de Streaming</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Administrar Cuentas de Streaming</h1>
+    
+    <!-- Formulario para agregar una nueva cuenta -->
+    <form id="formAgregarCuenta" method="POST" action="agregar_cuenta.php">
+        <label for="comprador_nombre">Nombre del Comprador:</label>
+        <input type="text" id="comprador_nombre" name="comprador_nombre" required><br>
+
+        <label for="plataforma">Plataforma:</label>
+        <input type="text" id="plataforma" name="plataforma" required><br>
+
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" name="tipo" required>
+            <option value="individual">Individual</option>
+            <option value="completa">Completa</option>
+        </select><br>
+
+        <div id="nombrePantallaDiv" style="display: none;">
+            <label for="nombre_pantalla">Nombre de la Pantalla:</label>
+            <input type="text" id="nombre_pantalla" name="nombre_pantalla"><br>
+        </div>
+
+        <label for="fecha_venta">Fecha de Venta:</label>
+        <input type="date" id="fecha_venta" name="fecha_venta" required><br>
+
+        <label for="fecha_fin">Fecha de Fin:</label>
+        <input type="date" id="fecha_fin" name="fecha_fin" required><br>
+
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" name="correo" required><br>
+
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" required><br>
+
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" step="0.01" required><br>
+
+        <input type="submit" value="Registrar Cuenta">
+    </form>
+
+    <h2>Buscar Usuario</h2>
+    <form method="GET" action="buscar_usuario.php">
+        <label for="buscar">Buscar por Nombre de Usuario:</label>
+        <input type="text" id="buscar" name="buscar">
+        <input type="submit" value="Buscar">
+    </form>
+
+    <h2>Registros de Cuentas</h2>
+    <div id="registros">
+        <!-- Aquí se mostrarán los registros de la base de datos -->
+        <?php include('mostrar_registros.php'); ?>
+    </div>
+
+    <script>
+        // Mostrar el campo de nombre de pantalla solo si se selecciona "individual"
+        document.getElementById('tipo').addEventListener('change', function() {
+            const nombrePantallaDiv = document.getElementById('nombrePantallaDiv');
+            if (this.value === 'individual') {
+                nombrePantallaDiv.style.display = 'block';
+            } else {
+                nombrePantallaDiv.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
